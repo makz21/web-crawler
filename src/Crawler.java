@@ -12,9 +12,22 @@ public class Crawler {
     public void search(String url, String searchWord) {
         while (this.pagesVisited.size() < PAGES_TO_SEARCH) {
             String currentUrl;
-
-
-        }
+            CrawlerLeg leg = new CrawlerLeg();
+            if(this.pagesToVisit.isEmpty()){
+                currentUrl = url;
+                this.pagesVisited.add(url);
+            }else{
+                currentUrl = this.nextUrl();
+            }
+            leg.crawl(currentUrl);
+            boolean success = leg.searchWordOnPage(searchWord);
+            if(success){
+                System.out.println(String.format("Word: %s found at page %s", searchWord, currentUrl));
+                break;
+            }
+            this.pagesToVisit.addAll(leg.getLinks());
+            }
+        System.out.println("\nEnd of program! Visited " + this.pagesVisited.size() + " pages");
 
     }
 
