@@ -20,7 +20,6 @@ public class Crawler {
                 currentUrl = this.nextUrl();
             }
             leg.crawl(currentUrl);
-           //  boolean success = leg.searchWordOnPage(searchWord);
             if(leg.searchWordOnPage(searchWord)){
                 System.out.println(String.format("Word: %s found at page %s", searchWord, currentUrl));
                 break;
